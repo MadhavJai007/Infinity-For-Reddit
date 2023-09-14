@@ -46,7 +46,11 @@
     <ml.docilealligator.infinityforreddit.customviews.CustomFontPreference
         app:key="restore_settings"
         app:title="@string/settings_restore_settings_title" />
-
+	
+	<ml.docilealligator.infinityforreddit.customviews.CustomFontPreference
+        app:key="client_id"
+        app:title="Set Client ID" />
+		
     <ml.docilealligator.infinityforreddit.customviews.CustomFontPreference
         app:title="@string/settings_crash_reports_title"
         app:fragment="ml.docilealligator.infinityforreddit.settings.CrashReportsFragment" />
