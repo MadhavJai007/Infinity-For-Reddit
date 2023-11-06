@@ -152,7 +152,8 @@ public class LoginActivity extends BaseActivity {
 
         Uri baseUri = Uri.parse(APIUtils.OAUTH_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendQueryParameter(APIUtils.CLIENT_ID_KEY, APIUtils.CLIENT_ID);
+        //        uriBuilder.appendQueryParameter(APIUtils.CLIENT_ID_KEY, APIUtils.CLIENT_ID);
+        uriBuilder.appendQueryParameter(APIUtils.CLIENT_ID_KEY, mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.CLIENT_ID_KEY, ""));
         uriBuilder.appendQueryParameter(APIUtils.RESPONSE_TYPE_KEY, APIUtils.RESPONSE_TYPE);
         uriBuilder.appendQueryParameter(APIUtils.STATE_KEY, APIUtils.STATE);
         uriBuilder.appendQueryParameter(APIUtils.REDIRECT_URI_KEY, APIUtils.REDIRECT_URI);
@@ -180,7 +181,10 @@ public class LoginActivity extends BaseActivity {
                         params.put("redirect_uri", APIUtils.REDIRECT_URI);
 
                         RedditAPI api = mRetrofit.create(RedditAPI.class);
-                        Call<String> accessTokenCall = api.getAccessToken(APIUtils.getHttpBasicAuthHeader(), params);
+                        //                        Call<String> accessTokenCall = api.getAccessToken(APIUtils.getHttpBasicAuthHeader(), params);
+                        Call<String> accessTokenCall = api.getAccessToken(APIUtils.getHttpBasicAuthHeader(
+                                mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.CLIENT_ID_KEY, "")
+                        ), params);
                         accessTokenCall.enqueue(new Callback<String>() {
                             @Override
                             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
